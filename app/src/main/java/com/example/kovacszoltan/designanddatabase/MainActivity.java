@@ -1,11 +1,14 @@
 package com.example.kovacszoltan.designanddatabase;
 
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -20,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Random r = new Random();
     Cursor c;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
-    int gombsorrend;
+    int gombsorrend, life = 5;
+    private AlertDialog.Builder alert_vesztett;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -177,6 +181,28 @@ public class MainActivity extends AppCompatActivity {
     public void helyesvalasz(){
     }
     public void rosszvalasz(){
+        if (life > 1){
+            life--;
+        } else{
+            alert_vesztett = new AlertDialog.Builder(MainActivity.this);
+            alert_vesztett.setTitle("Vesztettél!")
+                    .setMessage("Újra akarod kezdeni a játékot?")
+                    .setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        }
+                    })
+                    .setCancelable(false)
+                    .create();
+            alert_vesztett.show();
+        }
+
     }
     public void ujkerdes(){
         this.gombsorrend = r.nextInt(4) + 1;
