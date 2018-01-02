@@ -1,0 +1,213 @@
+package com.example.kovacszoltan.designanddatabase;
+
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.io.IOException;
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+    private com.example.kovacszoltan.designanddatabase.DatabaseHelper mDBHelper;
+    private SQLiteDatabase mDb;
+    private TextView tv_kerdes;
+    private Button btn_valasz1, btn_valasz2, btn_valasz3, btn_valasz4;
+    private Random r = new Random();
+    Cursor c;
+    int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
+    int gombsorrend;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        mDBHelper = new com.example.kovacszoltan.designanddatabase.DatabaseHelper(this);
+        init();
+        ujkerdes();
+        gombok();
+    }
+    public void init(){
+        tv_kerdes = (TextView) findViewById(R.id.tv_kerdes);
+        btn_valasz1 = (Button) findViewById(R.id.btn_valasz1);
+        btn_valasz2 = (Button) findViewById(R.id.btn_valasz2);
+        btn_valasz3 = (Button) findViewById(R.id.btn_valasz3);
+        btn_valasz4 = (Button) findViewById(R.id.btn_valasz4);
+    }
+    public void gombok(){
+        switch (this.gombsorrend){
+            case 1:
+                tv_kerdes.setText(this.c.getString(kerdesIndex));
+                btn_valasz1.setText(this.c.getString(valasz1index));
+                btn_valasz2.setText(this.c.getString(valasz2index));
+                btn_valasz3.setText(this.c.getString(valasz3index));
+                btn_valasz4.setText(this.c.getString(valasz4index));
+                btn_valasz4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ujkerdes();
+                        helyesvalasz();
+                        gombok();
+                    }
+                });
+                btn_valasz1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                break;
+            case 2:
+                tv_kerdes.setText(this.c.getString(kerdesIndex));
+                btn_valasz4.setText(this.c.getString(valasz1index));
+                btn_valasz3.setText(this.c.getString(valasz2index));
+                btn_valasz1.setText(this.c.getString(valasz3index));
+                btn_valasz2.setText(this.c.getString(valasz4index));
+                btn_valasz2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ujkerdes();
+                        helyesvalasz();
+                        gombok();
+                    }
+                });
+                btn_valasz4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                break;
+            case 3:
+                tv_kerdes.setText(this.c.getString(kerdesIndex));
+                btn_valasz2.setText(this.c.getString(valasz1index));
+                btn_valasz1.setText(this.c.getString(valasz2index));
+                btn_valasz4.setText(this.c.getString(valasz3index));
+                btn_valasz1.setText(this.c.getString(valasz4index));
+                btn_valasz1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ujkerdes();
+                        helyesvalasz();
+                        gombok();
+                    }
+                });
+                btn_valasz2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                break;
+            case 4:
+                tv_kerdes.setText(this.c.getString(kerdesIndex));
+                btn_valasz2.setText(this.c.getString(valasz1index));
+                btn_valasz4.setText(this.c.getString(valasz2index));
+                btn_valasz1.setText(this.c.getString(valasz3index));
+                btn_valasz3.setText(this.c.getString(valasz4index));
+                btn_valasz3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        ujkerdes();
+                        helyesvalasz();
+                        gombok();
+                    }
+                });
+                btn_valasz1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                btn_valasz4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        rosszvalasz();
+                    }
+                });
+                break;
+        }
+    }
+    public void helyesvalasz(){
+    }
+    public void rosszvalasz(){
+    }
+    public void ujkerdes(){
+        this.gombsorrend = r.nextInt(4) + 1;
+        this.idindex = r.nextInt(20) + 1;
+
+
+        try {
+            mDBHelper.updateDataBase();
+        } catch (IOException mIOException) {
+            throw new Error("UnableToUpdateDatabase");
+        }
+
+        try {
+            mDb = mDBHelper.getWritableDatabase();
+        } catch (SQLException mSQLException) {
+            throw mSQLException;
+        }
+        try {
+            this.c = mDb.rawQuery("SELECT * FROM quiz", null);
+
+            this.idIndex = c.getColumnIndex("id");
+            this.kerdesIndex = c.getColumnIndex("kerdes");
+            this.valasz1index = c.getColumnIndex("valasz1");
+            this.valasz2index = c.getColumnIndex("valasz2");
+            this.valasz3index = c.getColumnIndex("valasz3");
+            this.valasz4index = c.getColumnIndex("valasz4");
+
+            this.c.move(idindex);
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
