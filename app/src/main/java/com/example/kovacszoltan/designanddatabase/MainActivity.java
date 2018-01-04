@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
             case 3:
                 tv_kerdes.setText(this.c.getString(kerdesIndex));
                 btn_valasz2.setText(this.c.getString(valasz1index));
-                btn_valasz1.setText(this.c.getString(valasz2index));
+                btn_valasz3.setText(this.c.getString(valasz2index));
                 btn_valasz4.setText(this.c.getString(valasz3index));
                 btn_valasz1.setText(this.c.getString(valasz4index));
                 btn_valasz1.setOnClickListener(new View.OnClickListener() {
@@ -209,9 +209,9 @@ public class MainActivity extends AppCompatActivity {
         clearbuttons();
         teszt.setText(Integer.toString(this.gombsorrend));
         do {
-            this.elozogombsorrend = gombsorrend;
+            this.elozogombsorrend = this.gombsorrend;
             this.gombsorrend = r.nextInt(4) + 1;
-        }while (elozogombsorrend != gombsorrend);
+        }while (this.elozogombsorrend != this.gombsorrend);
 
         this.idindex = r.nextInt(20) + 1;
 
