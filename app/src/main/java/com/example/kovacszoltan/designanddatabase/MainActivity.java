@@ -18,12 +18,12 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private com.example.kovacszoltan.designanddatabase.DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
-    private TextView tv_kerdes;
+    private TextView tv_kerdes, teszt;
     private Button btn_valasz1, btn_valasz2, btn_valasz3, btn_valasz4;
     private Random r = new Random();
     Cursor c;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
-    int gombsorrend, life = 5;
+    int gombsorrend, life = 5, elozogombsorrend = 0;
     private AlertDialog.Builder alert_vesztett;
 
     @Override
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         btn_valasz2 = (Button) findViewById(R.id.btn_valasz2);
         btn_valasz3 = (Button) findViewById(R.id.btn_valasz3);
         btn_valasz4 = (Button) findViewById(R.id.btn_valasz4);
+        teszt = (TextView) findViewById(R.id.teszt);
     }
     public void gombok(){
         switch (this.gombsorrend){
@@ -205,7 +206,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void ujkerdes(){
-        this.gombsorrend = r.nextInt(4) + 1;
+        clearbuttons();
+        teszt.setText(Integer.toString(this.gombsorrend));
+        do {
+            this.elozogombsorrend = gombsorrend;
+            this.gombsorrend = r.nextInt(4) + 1;
+        }while (elozogombsorrend != gombsorrend);
+
         this.idindex = r.nextInt(20) + 1;
 
 
@@ -235,5 +242,11 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+    public void clearbuttons(){
+        btn_valasz1.setText("");
+        btn_valasz2.setText("");
+        btn_valasz3.setText("");
+        btn_valasz4.setText("");
     }
 }

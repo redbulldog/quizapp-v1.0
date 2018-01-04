@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/felsolinear">
+        android:id="@+id/felsolinear"
+        android:paddingTop="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,6 +22,12 @@
 
 
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/teszt"
+        android:text="0"
+        android:textSize="30dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
