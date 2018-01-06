@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tv_kerdes, teszt;
     private Button btn_valasz1, btn_valasz2, btn_valasz3, btn_valasz4;
     private Random r = new Random();
+    List<Integer> regikerdes = new ArrayList<Integer>();
     Cursor c;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
     int gombsorrend, life = 5, elozogombsorrend = 0;
@@ -206,47 +210,44 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void ujkerdes(){
-        clearbuttons();
         teszt.setText(Integer.toString(this.gombsorrend));
         do {
-            this.elozogombsorrend = this.gombsorrend;
-            this.gombsorrend = r.nextInt(4) + 1;
-        }while (this.elozogombsorrend != this.gombsorrend);
+            for (int i=0; i<regikerdes.size(); i++) {
+                do {
+                    this.elozogombsorrend = this.gombsorrend;
+                    this.gombsorrend = r.nextInt(4) + 1;
+                } while (this.elozogombsorrend != this.gombsorrend);
 
-        this.idindex = r.nextInt(20) + 1;
+                this.idindex = r.nextInt(20) + 1;
+            } while ();
 
+                try {
+                    mDBHelper.updateDataBase();
+                } catch (IOException mIOException) {
+                    throw new Error("UnableToUpdateDatabase");
+                }
 
-        try {
-            mDBHelper.updateDataBase();
-        } catch (IOException mIOException) {
-            throw new Error("UnableToUpdateDatabase");
-        }
+                try {
+                    mDb = mDBHelper.getWritableDatabase();
+                } catch (SQLException mSQLException) {
+                    throw mSQLException;
+                }
+                try {
+                    this.c = mDb.rawQuery("SELECT * FROM quiz", null);
 
-        try {
-            mDb = mDBHelper.getWritableDatabase();
-        } catch (SQLException mSQLException) {
-            throw mSQLException;
-        }
-        try {
-            this.c = mDb.rawQuery("SELECT * FROM quiz", null);
+                    this.idIndex = c.getColumnIndex("id");
+                    this.kerdesIndex = c.getColumnIndex("kerdes");
+                    this.valasz1index = c.getColumnIndex("valasz1");
+                    this.valasz2index = c.getColumnIndex("valasz2");
+                    this.valasz3index = c.getColumnIndex("valasz3");
+                    this.valasz4index = c.getColumnIndex("valasz4");
 
-            this.idIndex = c.getColumnIndex("id");
-            this.kerdesIndex = c.getColumnIndex("kerdes");
-            this.valasz1index = c.getColumnIndex("valasz1");
-            this.valasz2index = c.getColumnIndex("valasz2");
-            this.valasz3index = c.getColumnIndex("valasz3");
-            this.valasz4index = c.getColumnIndex("valasz4");
+                    this.c.move(idindex);
 
-            this.c.move(idindex);
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    public void clearbuttons(){
-        btn_valasz1.setText("");
-        btn_valasz2.setText("");
-        btn_valasz3.setText("");
-        btn_valasz4.setText("");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        regikerdes.add(idIndex);
     }
 }
