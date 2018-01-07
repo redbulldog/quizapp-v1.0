@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         ujkerdes();
                         helyesvalasz();
-                        gombok();
+
                     }
                 });
                 btn_valasz1.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         ujkerdes();
                         helyesvalasz();
-                        gombok();
+
                     }
                 });
                 btn_valasz4.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         ujkerdes();
                         helyesvalasz();
-                        gombok();
+
                     }
                 });
                 btn_valasz2.setOnClickListener(new View.OnClickListener() {
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         ujkerdes();
                         helyesvalasz();
-                        gombok();
+
                     }
                 });
                 btn_valasz1.setOnClickListener(new View.OnClickListener() {
@@ -209,49 +209,52 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-    public void ujkerdes(){
-                    this.gombsorrend = r.nextInt(4) + 1;
-                    regikerdes.add(21);
-            //this.idindex = r.nextInt(20) + 1;
-            if (kerdesekszama < 20) {
-                do {
-                    if (regikerdes.contains(idindex)) {
-                        this.idindex = r.nextInt(20) + 1;
-                    }
-                } while (regikerdes.contains(idindex) == true);
-                kerdesekszama++;
-            } else if(kerdesekszama == 20){
-                tv_kerdes.setText("A kérdések elfogytak!");
+    public void ujkerdes() {
+        this.gombsorrend = r.nextInt(4) + 1;
+        regikerdes.add(21);
+        //this.idindex = r.nextInt(20) + 1;
+        if (kerdesekszama < 20) {
+            do {
+                this.idindex = r.nextInt(20) + 1;
+                if (regikerdes.contains(idindex)) {
+                    this.idindex = r.nextInt(20) + 1;
+                }
+            } while (regikerdes.contains(idindex));
+            kerdesekszama++;
+            try {
+                mDBHelper.updateDataBase();
+            } catch (IOException mIOException) {
+                throw new Error("UnableToUpdateDatabase");
             }
+
+            try {
+                mDb = mDBHelper.getWritableDatabase();
+            } catch (SQLException mSQLException) {
+                throw mSQLException;
+            }
+            try {
+                this.c = mDb.rawQuery("SELECT * FROM quiz", null);
+
+                this.idIndex = c.getColumnIndex("id");
+                this.kerdesIndex = c.getColumnIndex("kerdes");
+                this.valasz1index = c.getColumnIndex("valasz1");
+                this.valasz2index = c.getColumnIndex("valasz2");
+                this.valasz3index = c.getColumnIndex("valasz3");
+                this.valasz4index = c.getColumnIndex("valasz4");
+
+                this.c.move(idindex);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            regikerdes.add(idindex);
+            gombok();
+
+        } else if (kerdesekszama == 20) {
+            tv_kerdes.setText("A kérdések elfogytak!");
+        }
         teszt.setText(Integer.toString(this.kerdesekszama));
 
-                try {
-                    mDBHelper.updateDataBase();
-                } catch (IOException mIOException) {
-                    throw new Error("UnableToUpdateDatabase");
-                }
 
-                try {
-                    mDb = mDBHelper.getWritableDatabase();
-                } catch (SQLException mSQLException) {
-                    throw mSQLException;
-                }
-                try {
-                    this.c = mDb.rawQuery("SELECT * FROM quiz", null);
-
-                    this.idIndex = c.getColumnIndex("id");
-                    this.kerdesIndex = c.getColumnIndex("kerdes");
-                    this.valasz1index = c.getColumnIndex("valasz1");
-                    this.valasz2index = c.getColumnIndex("valasz2");
-                    this.valasz3index = c.getColumnIndex("valasz3");
-                    this.valasz4index = c.getColumnIndex("valasz4");
-
-                    this.c.move(idindex);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                regikerdes.add(idindex);
-            }
-    }
+    }}
 
