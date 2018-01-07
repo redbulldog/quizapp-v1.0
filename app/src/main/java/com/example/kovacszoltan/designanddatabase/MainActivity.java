@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     List<Integer> regikerdes = new ArrayList<Integer>();
     Cursor c;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
-    int gombsorrend, life = 5, elozogombsorrend = 0;
+    int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0;
     private AlertDialog.Builder alert_vesztett;
 
     @Override
@@ -210,16 +210,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void ujkerdes(){
-        teszt.setText(Integer.toString(this.gombsorrend));
-        do {
-            for (int i=0; i<regikerdes.size(); i++) {
-                do {
-                    this.elozogombsorrend = this.gombsorrend;
                     this.gombsorrend = r.nextInt(4) + 1;
-                } while (this.elozogombsorrend != this.gombsorrend);
-
-                this.idindex = r.nextInt(20) + 1;
-            } while ();
+                    regikerdes.add(21);
+            //this.idindex = r.nextInt(20) + 1;
+            if (kerdesekszama < 20) {
+                do {
+                    if (regikerdes.contains(idindex)) {
+                        this.idindex = r.nextInt(20) + 1;
+                    }
+                } while (regikerdes.contains(idindex) == true);
+                kerdesekszama++;
+            } else if(kerdesekszama == 20){
+                tv_kerdes.setText("A kérdések elfogytak!");
+            }
+        teszt.setText(Integer.toString(this.kerdesekszama));
 
                 try {
                     mDBHelper.updateDataBase();
@@ -247,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                regikerdes.add(idindex);
             }
-        regikerdes.add(idIndex);
     }
-}
+
