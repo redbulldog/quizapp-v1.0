@@ -25,7 +25,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:id="@+id/alsolinear"
         android:layout_above="@+id/legalsolinear"
         android:orientation="horizontal"
@@ -33,7 +33,7 @@
         >
         <Button
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/btn_valasz1"
             android:text="Válasz1"
             android:layout_weight=".5"
@@ -41,14 +41,14 @@
             />
         <Button
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/btn_valasz2"
             android:text="Válasz2"
             android:layout_weight="0.5"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:id="@+id/legalsolinear"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
@@ -58,12 +58,12 @@
         <Button
             android:id="@+id/btn_valasz3"
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="Válasz3" />
         <Button
             android:layout_width="0dip"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/btn_valasz4"
             android:text="Válasz4"
             android:layout_weight="0.5"/>
