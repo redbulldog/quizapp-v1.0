@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainMenu extends AppCompatActivity {
-    private Button btn_newgame, btn_resoult, btn_exit;
+    private Button btn_newgame, btn_scoreboard, btn_exit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class MainMenu extends AppCompatActivity {
     }
     private void init(){
         btn_newgame = (Button) findViewById(R.id.btn_newgame);
-        btn_resoult = (Button) findViewById(R.id.btn_scoreboard);
+        btn_scoreboard = (Button) findViewById(R.id.btn_scoreboard);
         btn_exit = (Button) findViewById(R.id.btn_exit);
     }
     private void actions(){
@@ -27,6 +27,13 @@ public class MainMenu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent newgame = new Intent(MainMenu.this,MainActivity.class);
                 startActivity(newgame);
+            }
+        });
+        btn_scoreboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent scoreboard = new Intent(MainMenu.this,CategoriesActivity.class);
+                startActivity(scoreboard);
             }
         });
         btn_exit.setOnClickListener(new View.OnClickListener() {

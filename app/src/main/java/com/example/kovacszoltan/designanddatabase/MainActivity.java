@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Cursor c;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
     int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0;
-    private AlertDialog.Builder alert_vesztett;
+    private AlertDialog.Builder alert_vesztett, alert_kilep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,40 @@ public class MainActivity extends AppCompatActivity {
         btn_valasz2 = (Button) findViewById(R.id.btn_valasz2);
         btn_valasz3 = (Button) findViewById(R.id.btn_valasz3);
         btn_valasz4 = (Button) findViewById(R.id.btn_valasz4);
+        alert_vesztett = new AlertDialog.Builder(MainActivity.this);
+        alert_kilep = new AlertDialog.Builder(MainActivity.this);
+        alert_vesztett.setTitle("Vesztettél!")
+                .setMessage("Újra akarod kezdeni a játékot?")
+                .setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                })
+                .setCancelable(false)
+                .create();
+        alert_kilep.setTitle("Biztosan kilép?")
+                .setMessage("A jelenlegi állás elveszik!")
+                .setPositiveButton("Nem", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                })
+                .setCancelable(true)
+                .setNegativeButton("Igen", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                });
+    }
+    public void onBackPressed(){
+        alert_kilep.show();
     }
     public void gombok(){
         switch (this.gombsorrend){
@@ -188,22 +222,6 @@ public class MainActivity extends AppCompatActivity {
         if (life > 1){
             life--;
         } else{
-            alert_vesztett = new AlertDialog.Builder(MainActivity.this);
-            alert_vesztett.setTitle("Vesztettél!")
-                    .setMessage("Újra akarod kezdeni a játékot?")
-                    .setPositiveButton("Nem", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            finish();
-                        }
-                    })
-                    .setNegativeButton("Igen", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                        }
-                    })
-                    .setCancelable(false)
-                    .create();
             alert_vesztett.show();
         }
 

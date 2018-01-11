@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:text="Kilépés"
             android:id="@+id/btn_exit"/>
+
     </LinearLayout>
 
 </RelativeLayout>

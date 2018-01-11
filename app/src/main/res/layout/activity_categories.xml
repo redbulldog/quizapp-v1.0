@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kovacszoltan.designanddatabase.CategoriesActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:adjustViewBounds="true"
+                android:src="@drawable/category1"
+                android:id="@+id/ctg_movies"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/category1"
+                android:paddingTop="5dp"
+                android:adjustViewBounds="true"
+                android:layout_below="@id/ctg_movies"
+                android:id="@+id/ctg_movies1"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:paddingTop="5dp"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
+                android:src="@drawable/category1"
+                android:layout_below="@id/ctg_movies1"
+                android:id="@+id/ctg_movies2"/>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
