@@ -18,11 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
+    @BindView(R.id.tv_kerdes) TextView tv_kerdes;
+    @BindView(R.id.btn_valasz1) Button btn_valasz1;
+    @BindView(R.id.btn_valasz2) Button btn_valasz2;
+    @BindView(R.id.btn_valasz3) Button btn_valasz3;
+    @BindView(R.id.btn_valasz4) Button btn_valasz4;
+
     private com.example.kovacszoltan.designanddatabase.DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
-    private TextView tv_kerdes;
-    private Button btn_valasz1, btn_valasz2, btn_valasz3, btn_valasz4;
     private Random r = new Random();
     List<Integer> regikerdes = new ArrayList<Integer>();
     Cursor c;
@@ -34,17 +41,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         mDBHelper = new com.example.kovacszoltan.designanddatabase.DatabaseHelper(this);
         init();
         ujkerdes();
         gombok();
     }
     public void init(){
-        tv_kerdes = (TextView) findViewById(R.id.tv_kerdes);
-        btn_valasz1 = (Button) findViewById(R.id.btn_valasz1);
-        btn_valasz2 = (Button) findViewById(R.id.btn_valasz2);
-        btn_valasz3 = (Button) findViewById(R.id.btn_valasz3);
-        btn_valasz4 = (Button) findViewById(R.id.btn_valasz4);
         alert_vesztett = new AlertDialog.Builder(MainActivity.this);
         alert_kilep = new AlertDialog.Builder(MainActivity.this);
         alert_vesztett.setTitle("Vesztettél!")

@@ -6,21 +6,23 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainMenu extends AppCompatActivity {
-    private Button btn_newgame, btn_scoreboard, btn_exit;
+    @BindView(R.id.btn_newgame) Button btn_newgame;
+    @BindView(R.id.btn_scoreboard) Button btn_scoreboard;
+    @BindView(R.id.btn_exit) Button btn_exit;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        init();
+        ButterKnife.bind(this);
         actions();
     }
-    private void init(){
-        btn_newgame = (Button) findViewById(R.id.btn_newgame);
-        btn_scoreboard = (Button) findViewById(R.id.btn_scoreboard);
-        btn_exit = (Button) findViewById(R.id.btn_exit);
-    }
+
     private void actions(){
         btn_newgame.setOnClickListener(new View.OnClickListener() {
             @Override
