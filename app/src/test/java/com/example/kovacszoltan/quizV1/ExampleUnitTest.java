@@ -1,4 +1,4 @@
-package com.example.kovacszoltan.designanddatabase;
+package com.example.kovacszoltan.quizV1;
 
 import org.junit.Test;
 

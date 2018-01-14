@@ -1,4 +1,4 @@
-package com.example.kovacszoltan.designanddatabase;
+package com.example.kovacszoltan.quizV1;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

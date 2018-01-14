@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kovacszoltan.designanddatabase.CategoriesActivity">
+    tools:context="com.example.kovacszoltan.quizV1.CategoriesActivity">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbarStyle="outsideInset">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -16,24 +17,45 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:adjustViewBounds="true"
-                android:src="@drawable/category1"
+                android:src="@drawable/movies_category"
                 android:id="@+id/ctg_movies"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Filmek"
+                android:textAllCaps="true"
+                android:textSize="30dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:layout_marginTop="-52dp" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/category1"
-                android:paddingTop="5dp"
+                android:src="@drawable/game_category"
                 android:adjustViewBounds="true"
                 android:layout_below="@id/ctg_movies"
-                android:id="@+id/ctg_movies1"/>
+                android:id="@+id/ctg_games"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Játékok"
+                android:textAllCaps="true"
+                android:textSize="30dp"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:layout_marginTop="-52dp" />
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:paddingTop="5dp"
+
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
                 android:src="@drawable/category1"
-                android:layout_below="@id/ctg_movies1"
+                android:layout_below="@id/ctg_games"
                 android:id="@+id/ctg_movies2"/>
         </LinearLayout>
     </ScrollView>

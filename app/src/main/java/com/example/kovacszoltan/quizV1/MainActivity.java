@@ -1,17 +1,18 @@
-package com.example.kovacszoltan.designanddatabase;
+package com.example.kovacszoltan.quizV1;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewDebug;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,11 +29,12 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_valasz3) Button btn_valasz3;
     @BindView(R.id.btn_valasz4) Button btn_valasz4;
 
-    private com.example.kovacszoltan.designanddatabase.DatabaseHelper mDBHelper;
+    private com.example.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private Random r = new Random();
     List<Integer> regikerdes = new ArrayList<Integer>();
     Cursor c;
+    String kerdesekszama_sql, kerdesselect_sql;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
     int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0;
     private AlertDialog.Builder alert_vesztett, alert_kilep;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mDBHelper = new com.example.kovacszoltan.designanddatabase.DatabaseHelper(this);
+        mDBHelper = new com.example.kovacszoltan.quizV1.DatabaseHelper(this);
         init();
         ujkerdes();
         gombok();
@@ -230,9 +232,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void ujkerdes() {
+        categorieshelper();
         this.gombsorrend = r.nextInt(4) + 1;
         regikerdes.add(21);
-        //this.idindex = r.nextInt(20) + 1;
+        mDb = mDBHelper.getWritableDatabase();
+        this.c = mDb.rawQuery("SELECT " + this.kerdesselect_sql, null);
+        //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
         if (kerdesekszama < 20) {
             do {
                 this.idindex = r.nextInt(20) + 1;
@@ -276,5 +281,13 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    }}
+    }
+private void categorieshelper(){
+    SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
+    this.kerdesekszama_sql = sharedPreferences.getString("kerdesekszama", "");
+    this.kerdesselect_sql = sharedPreferences.getString("kerdesselect", "");
+
+}
+
+}
 
