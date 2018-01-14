@@ -2,6 +2,7 @@ package com.example.kovacszoltan.quizV1;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -33,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private SQLiteDatabase mDb;
     private Random r = new Random();
     List<Integer> regikerdes = new ArrayList<Integer>();
+    List<String> kerdes = new ArrayList<String>();
+    List<String> valasz1 = new ArrayList<String>();
+    List<String> valasz2 = new ArrayList<String>();
+    List<String> valasz3 = new ArrayList<String>();
+    List<String> valasz4 = new ArrayList<String>();
     Cursor c;
     String kerdesekszama_sql, kerdesselect_sql;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
@@ -78,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Igen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent gomain = new Intent(MainActivity.this, MainMenu.class);
+                        startActivity(gomain);
                         finish();
                     }
                 });
@@ -238,7 +246,11 @@ public class MainActivity extends AppCompatActivity {
         mDb = mDBHelper.getWritableDatabase();
         this.c = mDb.rawQuery("SELECT " + this.kerdesselect_sql, null);
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
-        if (kerdesekszama < 20) {
+        databasetolist();
+
+
+
+        if (kerdesekszama < c.getCount()) {
             do {
                 this.idindex = r.nextInt(20) + 1;
                 if (regikerdes.contains(idindex)) {
@@ -258,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
                 throw mSQLException;
             }
             try {
-                this.c = mDb.rawQuery("SELECT * FROM quiz", null);
+                //this.c = mDb.rawQuery("SELECT * FROM quiz", null);
 
                 this.idIndex = c.getColumnIndex("id");
                 this.kerdesIndex = c.getColumnIndex("kerdes");
@@ -273,6 +285,9 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             regikerdes.add(idindex);
+
+
+
             gombok();
 
         } else if (kerdesekszama == 20) {
@@ -287,6 +302,24 @@ private void categorieshelper(){
     this.kerdesekszama_sql = sharedPreferences.getString("kerdesekszama", "");
     this.kerdesselect_sql = sharedPreferences.getString("kerdesselect", "");
 
+}
+private void databasetolist(){
+    c.moveToFirst();
+    for(int i=0; i < c.getCount(); i++)
+    {
+        this.idIndex = c.getColumnIndex("id");
+        this.kerdesIndex = c.getColumnIndex("kerdes");
+        this.valasz1index = c.getColumnIndex("valasz1");
+        this.valasz2index = c.getColumnIndex("valasz2");
+        this.valasz3index = c.getColumnIndex("valasz3");
+        this.valasz4index = c.getColumnIndex("valasz4");
+        kerdes.add(c.getString(kerdesIndex));
+        valasz1.add(c.getString(valasz1index));
+        valasz2.add(c.getString(valasz2index));
+        valasz3.add(c.getString(valasz3index));
+        valasz4.add(c.getString(valasz4index));
+        c.moveToNext();
+    }
 }
 
 }

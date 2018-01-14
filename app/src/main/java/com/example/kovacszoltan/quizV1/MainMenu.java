@@ -27,14 +27,14 @@ public class MainMenu extends AppCompatActivity {
         btn_newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newgame = new Intent(MainMenu.this,MainActivity.class);
+                Intent newgame = new Intent(MainMenu.this,CategoriesActivity.class);
                 startActivity(newgame);
             }
         });
         btn_scoreboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent scoreboard = new Intent(MainMenu.this,CategoriesActivity.class);
+                Intent scoreboard = new Intent(MainMenu.this,ScoreBoard.class);
                 startActivity(scoreboard);
             }
         });

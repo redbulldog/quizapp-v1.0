@@ -1,6 +1,7 @@
 package com.example.kovacszoltan.quizV1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import butterknife.ButterKnife;
 public class CategoriesActivity extends AppCompatActivity {
     @BindView(R.id.ctg_movies) ImageView ctgmovies;
     @BindView(R.id.ctg_games) ImageView ctggames;
+    @BindView(R.id.ctg_all) ImageView ctgall;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,32 @@ public class CategoriesActivity extends AppCompatActivity {
                 editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WEHERE kategoria='filmek'");
                 editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='filmek'");
                 editor.commit();
+                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
+                startActivity(startgame);
+            }
+        });
+        ctgall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz");
+                editor.putString("kerdesselect", "* FROM quiz");
+                editor.commit();
+                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
+                startActivity(startgame);
+            }
+        });
+        ctggames.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WEHERE kategoria='jatekok'");
+                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='filmek'");
+                editor.commit();
+                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
+                startActivity(startgame);
             }
         });
     }
