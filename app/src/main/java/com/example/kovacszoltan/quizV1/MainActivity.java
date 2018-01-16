@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Cursor c;
     String kerdesekszama_sql, kerdesselect_sql;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
-    int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0;
+    int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0, kerdesek = 0;
     private AlertDialog.Builder alert_vesztett, alert_kilep;
 
     @Override
@@ -96,11 +96,11 @@ public class MainActivity extends AppCompatActivity {
     public void gombok(){
         switch (this.gombsorrend){
             case 1:
-                tv_kerdes.setText(this.c.getString(kerdesIndex));
-                btn_valasz1.setText(this.c.getString(valasz1index));
-                btn_valasz2.setText(this.c.getString(valasz2index));
-                btn_valasz3.setText(this.c.getString(valasz3index));
-                btn_valasz4.setText(this.c.getString(valasz4index));
+                tv_kerdes.setText(kerdes.get(this.kerdesek));
+                btn_valasz1.setText(valasz1.get(this.kerdesek));
+                btn_valasz2.setText(valasz2.get(this.kerdesek));
+                btn_valasz3.setText(valasz3.get(this.kerdesek));
+                btn_valasz4.setText(valasz4.get(this.kerdesek));
                 btn_valasz4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -129,11 +129,11 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
             case 2:
-                tv_kerdes.setText(this.c.getString(kerdesIndex));
-                btn_valasz4.setText(this.c.getString(valasz1index));
-                btn_valasz3.setText(this.c.getString(valasz2index));
-                btn_valasz1.setText(this.c.getString(valasz3index));
-                btn_valasz2.setText(this.c.getString(valasz4index));
+                tv_kerdes.setText(kerdes.get(this.kerdesek));
+                btn_valasz4.setText(valasz1.get(this.kerdesek));
+                btn_valasz3.setText(valasz2.get(this.kerdesek));
+                btn_valasz1.setText(valasz3.get(this.kerdesek));
+                btn_valasz2.setText(valasz4.get(this.kerdesek));
                 btn_valasz2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -162,11 +162,11 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
             case 3:
-                tv_kerdes.setText(this.c.getString(kerdesIndex));
-                btn_valasz2.setText(this.c.getString(valasz1index));
-                btn_valasz3.setText(this.c.getString(valasz2index));
-                btn_valasz4.setText(this.c.getString(valasz3index));
-                btn_valasz1.setText(this.c.getString(valasz4index));
+                tv_kerdes.setText(kerdes.get(this.kerdesek));
+                btn_valasz2.setText(valasz1.get(this.kerdesek));
+                btn_valasz3.setText(valasz2.get(this.kerdesek));
+                btn_valasz4.setText(valasz3.get(this.kerdesek));
+                btn_valasz1.setText(valasz4.get(this.kerdesek));
                 btn_valasz1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -195,11 +195,11 @@ public class MainActivity extends AppCompatActivity {
                 });
                 break;
             case 4:
-                tv_kerdes.setText(this.c.getString(kerdesIndex));
-                btn_valasz2.setText(this.c.getString(valasz1index));
-                btn_valasz4.setText(this.c.getString(valasz2index));
-                btn_valasz1.setText(this.c.getString(valasz3index));
-                btn_valasz3.setText(this.c.getString(valasz4index));
+                tv_kerdes.setText(kerdes.get(this.kerdesek));
+                btn_valasz2.setText(valasz1.get(this.kerdesek));
+                btn_valasz4.setText(valasz2.get(this.kerdesek));
+                btn_valasz1.setText(valasz3.get(this.kerdesek));
+                btn_valasz3.setText(valasz4.get(this.kerdesek));
                 btn_valasz3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -247,10 +247,28 @@ public class MainActivity extends AppCompatActivity {
         this.c = mDb.rawQuery("SELECT " + this.kerdesselect_sql, null);
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
         databasetolist();
-
-
-
         if (kerdesekszama < c.getCount()) {
+            do {
+                this.kerdesek = r.nextInt(c.getCount());
+                if (regikerdes.contains(kerdesek)) {
+                    this.kerdesek = r.nextInt(c.getCount());
+                }
+            } while (regikerdes.contains(kerdesek));
+
+            this.kerdesek = r.nextInt(c.getCount());
+            regikerdes.add(this.kerdesek);
+
+            kerdesekszama++;
+            gombok();
+        } else if (kerdesekszama == c.getCount())
+        {
+            tv_kerdes.setText("A kérdések elfogytak!");
+        }
+        Toast.makeText(MainActivity.this, Integer.toString(this.kerdesek), Toast.LENGTH_SHORT).show();
+
+
+
+        /*if (kerdesekszama < c.getCount()) {
             do {
                 this.idindex = r.nextInt(20) + 1;
                 if (regikerdes.contains(idindex)) {
@@ -292,7 +310,7 @@ public class MainActivity extends AppCompatActivity {
 
         } else if (kerdesekszama == 20) {
             tv_kerdes.setText("A kérdések elfogytak!");
-        }
+        }*/
 
 
 

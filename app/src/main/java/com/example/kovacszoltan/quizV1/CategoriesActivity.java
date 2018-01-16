@@ -55,7 +55,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WEHERE kategoria='jatekok'");
-                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='filmek'");
+                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='jatekok'");
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
                 startActivity(startgame);
