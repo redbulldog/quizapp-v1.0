@@ -264,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
         {
             tv_kerdes.setText("A kérdések elfogytak!");
         }
-        Toast.makeText(MainActivity.this, Integer.toString(this.kerdesek), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, Integer.toString(this.kerdesek), Toast.LENGTH_SHORT).show();
 
 
 

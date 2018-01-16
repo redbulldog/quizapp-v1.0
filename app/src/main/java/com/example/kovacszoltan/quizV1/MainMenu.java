@@ -41,8 +41,11 @@ public class MainMenu extends AppCompatActivity {
         btn_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                finishAffinity();
             }
         });
+    }
+    public void onBackPressed(){
+        finishAffinity();
     }
 }
