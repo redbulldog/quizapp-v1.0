@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     List<String> valasz4 = new ArrayList<String>();
     Cursor c;
     String kerdesekszama_sql, kerdesselect_sql;
-    int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, idindex;
+    int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, jelenkerdesek;
     int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0, kerdesek = 0;
     private AlertDialog.Builder alert_vesztett, alert_kilep;
 
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         mDBHelper = new com.example.kovacszoltan.quizV1.DatabaseHelper(this);
+        categorieshelper();
         init();
         ujkerdes();
         gombok();
@@ -240,12 +241,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void ujkerdes() {
-        categorieshelper();
+
         this.gombsorrend = r.nextInt(4) + 1;
-        regikerdes.add(21);
         mDb = mDBHelper.getWritableDatabase();
         this.c = mDb.rawQuery("SELECT " + this.kerdesselect_sql, null);
-        //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
+        jelenkerdesek = c.getCount();
+        Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
         databasetolist();
         if (kerdesekszama < c.getCount()) {
             do {
@@ -264,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
         {
             tv_kerdes.setText("A kérdések elfogytak!");
         }
-        //Toast.makeText(MainActivity.this, Integer.toString(this.kerdesek), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
 
 
 
@@ -317,13 +318,12 @@ public class MainActivity extends AppCompatActivity {
     }
 private void categorieshelper(){
     SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
-    this.kerdesekszama_sql = sharedPreferences.getString("kerdesekszama", "");
     this.kerdesselect_sql = sharedPreferences.getString("kerdesselect", "");
 
 }
 private void databasetolist(){
     c.moveToFirst();
-    for(int i=0; i < c.getCount(); i++)
+    for(int i=0; i < this.jelenkerdesek; i++)
     {
         this.idIndex = c.getColumnIndex("id");
         this.kerdesIndex = c.getColumnIndex("kerdes");
@@ -336,6 +336,7 @@ private void databasetolist(){
         valasz2.add(c.getString(valasz2index));
         valasz3.add(c.getString(valasz3index));
         valasz4.add(c.getString(valasz4index));
+
         c.moveToNext();
     }
 }

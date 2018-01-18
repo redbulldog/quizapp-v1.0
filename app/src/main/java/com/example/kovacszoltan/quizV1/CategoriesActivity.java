@@ -16,6 +16,7 @@ public class CategoriesActivity extends AppCompatActivity {
     @BindView(R.id.ctg_movies) ImageView ctgmovies;
     @BindView(R.id.ctg_games) ImageView ctggames;
     @BindView(R.id.ctg_all) ImageView ctgall;
+    @BindView(R.id.ctg_food) ImageView ctgfood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,6 @@ public class CategoriesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WEHERE kategoria='filmek'");
                 editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='filmek'");
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
@@ -42,7 +42,6 @@ public class CategoriesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz");
                 editor.putString("kerdesselect", "* FROM quiz");
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
@@ -54,8 +53,19 @@ public class CategoriesActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WEHERE kategoria='jatekok'");
                 editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='jatekok'");
+                editor.commit();
+                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
+                startActivity(startgame);
+            }
+        });
+        ctgfood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WHERE kategoria='etelital'");
+                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='etelital'");
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
                 startActivity(startgame);

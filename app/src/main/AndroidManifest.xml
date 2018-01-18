@@ -18,9 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.kovacszoltan.quizV1.MainActivity" />
-        <activity android:name="com.example.kovacszoltan.quizV1.ScoreBoard" />
-        <activity android:name="com.example.kovacszoltan.quizV1.CategoriesActivity"></activity>
+        <activity android:name="com.example.kovacszoltan.quizV1.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.kovacszoltan.quizV1.ScoreBoard"
+            android:screenOrientation="portrait"/>
+        <activity android:name="com.example.kovacszoltan.quizV1.CategoriesActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>
