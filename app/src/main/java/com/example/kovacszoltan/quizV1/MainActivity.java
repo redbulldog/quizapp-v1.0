@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -246,17 +247,17 @@ public class MainActivity extends AppCompatActivity {
         mDb = mDBHelper.getWritableDatabase();
         this.c = mDb.rawQuery("SELECT " + this.kerdesselect_sql, null);
         jelenkerdesek = c.getCount();
-        Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
         databasetolist();
         if (kerdesekszama < c.getCount()) {
+            this.kerdesek = r.nextInt(c.getCount());
             do {
-                this.kerdesek = r.nextInt(c.getCount());
                 if (regikerdes.contains(kerdesek)) {
                     this.kerdesek = r.nextInt(c.getCount());
                 }
-            } while (regikerdes.contains(kerdesek));
+            } while (regikerdes.contains(this.kerdesek));
 
-            this.kerdesek = r.nextInt(c.getCount());
+            //Toast.makeText(MainActivity.this, Integer.toString(this.kerdesek), Toast.LENGTH_SHORT).show();
             regikerdes.add(this.kerdesek);
 
             kerdesekszama++;
@@ -266,54 +267,6 @@ public class MainActivity extends AppCompatActivity {
             tv_kerdes.setText("A kérdések elfogytak!");
         }
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
-
-
-
-        /*if (kerdesekszama < c.getCount()) {
-            do {
-                this.idindex = r.nextInt(20) + 1;
-                if (regikerdes.contains(idindex)) {
-                    this.idindex = r.nextInt(20) + 1;
-                }
-            } while (regikerdes.contains(idindex));
-            kerdesekszama++;
-            try {
-                mDBHelper.updateDataBase();
-            } catch (IOException mIOException) {
-                throw new Error("UnableToUpdateDatabase");
-            }
-
-            try {
-                mDb = mDBHelper.getWritableDatabase();
-            } catch (SQLException mSQLException) {
-                throw mSQLException;
-            }
-            try {
-                //this.c = mDb.rawQuery("SELECT * FROM quiz", null);
-
-                this.idIndex = c.getColumnIndex("id");
-                this.kerdesIndex = c.getColumnIndex("kerdes");
-                this.valasz1index = c.getColumnIndex("valasz1");
-                this.valasz2index = c.getColumnIndex("valasz2");
-                this.valasz3index = c.getColumnIndex("valasz3");
-                this.valasz4index = c.getColumnIndex("valasz4");
-
-                this.c.move(idindex);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            regikerdes.add(idindex);
-
-
-
-            gombok();
-
-        } else if (kerdesekszama == 20) {
-            tv_kerdes.setText("A kérdések elfogytak!");
-        }*/
-
-
 
     }
 private void categorieshelper(){
