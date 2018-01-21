@@ -25,6 +25,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Felhasználónév"
+            android:id="@+id/btn_felh_nev"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Kilépés"
             android:id="@+id/btn_exit"/>
 
