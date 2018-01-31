@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_valasz2) Button btn_valasz2;
     @BindView(R.id.btn_valasz3) Button btn_valasz3;
     @BindView(R.id.btn_valasz4) Button btn_valasz4;
+    @BindView(R.id.txt_kerdesekszama) TextView txt_kerdesekszama;
 
     private com.example.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
@@ -239,6 +241,10 @@ public class MainActivity extends AppCompatActivity {
         } else{
             alert_vesztett.show();
         }
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (vibrator.hasVibrator()) {
+            vibrator.vibrate(300); // for 500 ms
+        }
 
     }
     public void ujkerdes() {
@@ -259,6 +265,7 @@ public class MainActivity extends AppCompatActivity {
 
             //Toast.makeText(MainActivity.this, Integer.toString(this.kerdesek), Toast.LENGTH_SHORT).show();
             regikerdes.add(this.kerdesek);
+            txt_kerdesekszama.setText(Integer.toString(kerdesekszama+1) +" / " + Integer.toString(c.getCount()));
 
             kerdesekszama++;
             gombok();
