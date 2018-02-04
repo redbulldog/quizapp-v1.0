@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
     List<String> valasz4 = new ArrayList<String>();
     Cursor c;
     String kerdesekszama_sql, kerdesselect_sql;
-    int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, jelenkerdesek;
+    int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, jelenkerdesek, pontok=0;
     int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0, kerdesek = 0;
+    private String username;
     private AlertDialog.Builder alert_vesztett, alert_kilep;
 
     @Override
@@ -93,6 +94,9 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        this.username = sharedPreferences.getString("username", "");
+        Toast.makeText(MainActivity.this,this.username.toString(),Toast.LENGTH_SHORT).show();
     }
     public void onBackPressed(){
         alert_kilep.show();
@@ -234,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void helyesvalasz(){
+        pontok++;
     }
     public void rosszvalasz(){
         if (life > 1){
@@ -245,7 +250,8 @@ public class MainActivity extends AppCompatActivity {
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
         }
-
+        ujkerdes();
+        pontok--;
     }
     public void ujkerdes() {
 
@@ -272,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (kerdesekszama == c.getCount())
         {
             tv_kerdes.setText("A kérdések elfogytak!");
+            mDBHelper.adatRogzites(this.username,this.pontok);
         }
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
 

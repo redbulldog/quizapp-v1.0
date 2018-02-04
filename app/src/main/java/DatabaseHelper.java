@@ -1,5 +1,6 @@
 package com.example.kovacszoltan.quizV1;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -78,6 +79,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean openDataBase() throws SQLException {
         mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
         return mDataBase != null;
+    }
+    public boolean adatRogzites(String username, Integer pontok_szama){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("Username",username);
+        contentValues.put("Pontok_szama",pontok_szama);
+
+        long result = db.insert("Scoreboard",null,contentValues);
+
+        if (result == -1){
+            return false;       //sikertelen felvétel esetén false eredményt add vissza
+        }else{
+            return true;       //sikeres felvétel esetén true eredményt add vissza
+        }
     }
 
     @Override
