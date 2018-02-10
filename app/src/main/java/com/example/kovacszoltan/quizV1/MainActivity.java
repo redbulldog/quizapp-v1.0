@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 });
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         this.username = sharedPreferences.getString("username", "");
-        Toast.makeText(MainActivity.this,this.username.toString(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,this.username.toString(),Toast.LENGTH_SHORT).show();
     }
     public void onBackPressed(){
         alert_kilep.show();
