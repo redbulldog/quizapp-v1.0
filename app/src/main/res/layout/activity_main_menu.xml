@@ -54,6 +54,8 @@
             android:textColor="#fff"
             android:padding="15dp"
             android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/ic_man_user"
+            android:drawableTint="#fff"
             android:textAlignment="textStart"/>
         <Button
             android:layout_width="180dp"

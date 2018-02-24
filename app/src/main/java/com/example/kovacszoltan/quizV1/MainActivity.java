@@ -241,11 +241,11 @@ public class MainActivity extends AppCompatActivity {
         pontok++;
     }
     public void rosszvalasz(){
-        if (life > 1){
+        /*if (life > 1){
             life--;
         } else{
             alert_vesztett.show();
-        }
+        }*/
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
@@ -279,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
         {
             tv_kerdes.setText("A kérdések elfogytak!");
             mDBHelper.adatRogzites(this.username,this.pontok);
+            Toast.makeText(MainActivity.this,Integer.toString(pontok),Toast.LENGTH_SHORT).show();
         }
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
 
