@@ -124,13 +124,13 @@ public class MainMenu extends AppCompatActivity {
                 Uri contentURI = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
-                    String path = saveImage(bitmap);
-                    Toast.makeText(MainActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                    imageview.setImageBitmap(bitmap);
+                    //String path = saveImage(bitmap);
+                    Toast.makeText(MainMenu.this, bitmap.toString(), Toast.LENGTH_SHORT).show();
+                    profile_image.setImageBitmap(bitmap);
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(MainActivity.this, "Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainMenu.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
 
