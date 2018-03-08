@@ -1,9 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.kovacszoltan.quizV1.ScoreBoard">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eredménytábla"
+        android:id="@+id/scoretext"
+        android:textAlignment="center"
+        android:textSize="40dp" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scoretable"
+        android:layout_below="@id/scoretext"
+        android:stretchColumns="1">>
+        <TableRow>
+            <TextView
+                android:paddingLeft="60dip"
+                android:id="@+id/tvuser1"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:textSize="30dp"/>
+            <TextView
+                android:paddingRight="60dip"
+                android:id="@+id/tvpont1"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:gravity="right"
+                android:textSize="30dp"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:paddingLeft="60dip"
+                android:id="@+id/tvuser2"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:textSize="30dp"/>
+            <TextView
+                android:paddingRight="60dip"
+                android:id="@+id/tvpont2"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:gravity="right"
+                android:textSize="30dp"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:paddingLeft="60dip"
+                android:id="@+id/tvuser3"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:textSize="30dp"/>
+            <TextView
+                android:paddingRight="60dip"
+                android:id="@+id/tvpont3"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:gravity="right"
+                android:textSize="30dp"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:paddingLeft="60dip"
+                android:id="@+id/tvuser4"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:textSize="30dp"/>
+            <TextView
+                android:paddingRight="60dip"
+                android:id="@+id/tvpont4"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:gravity="right"
+                android:textSize="30dp"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:paddingLeft="60dip"
+                android:id="@+id/tvuser5"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:textSize="30dp"/>
+            <TextView
+                android:paddingRight="60dip"
+                android:id="@+id/tvpont5"
+                android:text="Teszt"
+                android:paddingBottom="10dip"
+                android:paddingTop="10dip"
+                android:gravity="right"
+                android:textSize="30dp"/>
+        </TableRow>
 
-</android.support.constraint.ConstraintLayout>
+    </TableLayout>
+
+</RelativeLayout>
