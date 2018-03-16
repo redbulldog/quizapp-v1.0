@@ -7,12 +7,15 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.Drawable;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_valasz2) Button btn_valasz2;
     @BindView(R.id.btn_valasz3) Button btn_valasz3;
     @BindView(R.id.btn_valasz4) Button btn_valasz4;
+    @BindView(R.id.Main_act) RelativeLayout Main_act;
     @BindView(R.id.txt_kerdesekszama) TextView txt_kerdesekszama;
 
     private com.example.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
@@ -112,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_valasz4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         ujkerdes();
                         helyesvalasz();
 
@@ -145,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_valasz2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         ujkerdes();
                         helyesvalasz();
 
@@ -178,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_valasz1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         ujkerdes();
                         helyesvalasz();
 
@@ -211,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
                 btn_valasz3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         ujkerdes();
                         helyesvalasz();
 
@@ -250,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
         }
+
         ujkerdes();
         pontok--;
     }
@@ -283,12 +292,22 @@ public class MainActivity extends AppCompatActivity {
         }
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
 
+
+
+
+
+
     }
-private void categorieshelper(){
+private void categorieshelper() {
     SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
     this.kerdesselect_sql = sharedPreferences.getString("kerdesselect", "");
-
+    if (this.kerdesselect_sql.equals("* FROM quiz WHERE kategoria='jatekok'")) {
+        Main_act.setBackgroundResource(R.drawable.games_bg);
+    } else if (this.kerdesselect_sql.equals("* FROM quiz WHERE kategoria='etelital'")) {
+        Main_act.setBackgroundResource(R.drawable.food_bg);
+    }
 }
+
 private void databasetolist(){
     c.moveToFirst();
     for(int i=0; i < this.jelenkerdesek; i++)

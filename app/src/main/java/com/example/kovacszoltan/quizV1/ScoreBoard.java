@@ -4,6 +4,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ public class ScoreBoard extends AppCompatActivity {
     @BindView(R.id.tvpont4) TextView tvpont4;
     @BindView(R.id.tvuser5) TextView tvuser5;
     @BindView(R.id.tvpont5) TextView tvpont5;
+    @BindView(R.id.clearscore) Button clearscore;
     private com.example.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private Cursor c;
@@ -39,6 +42,15 @@ public class ScoreBoard extends AppCompatActivity {
         mDBHelper = new com.example.kovacszoltan.quizV1.DatabaseHelper(this);
         databasetolist();
         listtotable();
+        clearscore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDb = mDBHelper.getWritableDatabase();
+                //mDb.execSQL("TRUNCATE table scoreboard");
+                mDb.execSQL("delete from Scoreboard");
+
+            }
+        });
     }
 
 
