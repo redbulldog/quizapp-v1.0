@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, jelenkerdesek, pontok=0;
     int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0, kerdesek = 0;
     private String username;
-    private AlertDialog.Builder alert_vesztett, alert_kilep;
+    private AlertDialog.Builder alert_vege, alert_kilep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +65,43 @@ public class MainActivity extends AppCompatActivity {
         gombok();
     }
     public void init(){
-        alert_vesztett = new AlertDialog.Builder(MainActivity.this);
+        alert_vege = new AlertDialog.Builder(MainActivity.this);
         alert_kilep = new AlertDialog.Builder(MainActivity.this);
-        alert_vesztett.setTitle("Vesztettél!")
-                .setMessage("Újra akarod kezdeni a játékot?")
+        alert_vege.setTitle("Elfogytak a kérédések!")
+                .setMessage("Szeretnéd folytatni egy másik kategóriával?")
                 .setPositiveButton("Nem", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        mDBHelper.adatRogzites(username,pontok);
+                        SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear().commit();
+                        Intent gomain = new Intent(MainActivity.this, MainMenu.class);
+                        startActivity(gomain);
                         finish();
                     }
                 })
                 .setNegativeButton("Igen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent ujkategoria = new Intent(MainActivity.this, CategoriesActivity.class);
+                        startActivity(ujkategoria);
+                        SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", username);
+                        editor.putInt("pontok",pontok);
+                        if(kerdesselect_sql.equals("* FROM quiz WHERE kategoria='jatekok'"))
+                        {
+                            editor.putInt("jatekok", 1);
+                        } else if(kerdesselect_sql.equals("* FROM quiz WHERE kategoria='filmek'"))
+                        {
+                            editor.putInt("filmek", 1);
+                        } else if(kerdesselect_sql.equals("* FROM quiz WHERE kategoria='etelital'"))
+                        {
+                            editor.putInt("etelital", 1);
+                        }
+                        editor.commit();
+                        finish();
                     }
                 })
                 .setCancelable(false)
@@ -100,7 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 });
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         this.username = sharedPreferences.getString("username", "");
-        //Toast.makeText(MainActivity.this,this.username.toString(),Toast.LENGTH_SHORT).show();
+        SharedPreferences sharedPreferences2 = getSharedPreferences("Scores", Context.MODE_PRIVATE);
+        this.pontok = sharedPreferences2.getInt("pontok", 0);
+        Toast.makeText(MainActivity.this,Integer.toString(this.pontok),Toast.LENGTH_SHORT).show();
     }
     public void onBackPressed(){
         alert_kilep.show();
@@ -253,11 +279,11 @@ public class MainActivity extends AppCompatActivity {
             life--;
         } else{
             alert_vesztett.show();
-        }*/
+        }
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
-        }
+        }*/
 
         ujkerdes();
         pontok--;
@@ -287,7 +313,8 @@ public class MainActivity extends AppCompatActivity {
         } else if (kerdesekszama == c.getCount())
         {
             tv_kerdes.setText("A kérdések elfogytak!");
-            mDBHelper.adatRogzites(this.username,this.pontok);
+            alert_vege.show();
+            //mDBHelper.adatRogzites(this.username,this.pontok);
             Toast.makeText(MainActivity.this,Integer.toString(pontok),Toast.LENGTH_SHORT).show();
         }
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();

@@ -48,6 +48,9 @@ public class ScoreBoard extends AppCompatActivity {
                 mDb = mDBHelper.getWritableDatabase();
                 //mDb.execSQL("TRUNCATE table scoreboard");
                 mDb.execSQL("delete from Scoreboard");
+                pontok_szama.clear();
+                pont_nev.clear();
+                listtotable();
 
             }
         });

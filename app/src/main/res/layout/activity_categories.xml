@@ -23,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Filmek"
+                android:id="@+id/txt_movies"
                 android:textAllCaps="true"
                 android:textSize="30dp"
                 android:textColor="#ffffff"
@@ -41,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Játékok"
+                android:id="@+id/txt_games"
                 android:textAllCaps="true"
                 android:textSize="30dp"
                 android:textColor="#ffffff"
@@ -61,6 +63,7 @@
                 android:textAllCaps="true"
                 android:textSize="30dp"
                 android:textColor="#ffffff"
+                android:id="@+id/txt_food"
                 android:textStyle="bold"
                 android:fontFamily="casual"
                 android:layout_marginTop="-52dp" />
