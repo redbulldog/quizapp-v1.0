@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.kovacszoltan.quizV1.MainMenu"
+    tools:context="com.quizapp.kovacszoltan.quizV1.MainMenu"
     android:background="@drawable/android_main_menu_bg">
 
     <LinearLayout

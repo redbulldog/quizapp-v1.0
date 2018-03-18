@@ -1,4 +1,4 @@
-package com.example.kovacszoltan.quizV1;
+package com.quizapp.kovacszoltan.quizV1;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class ScoreBoard extends AppCompatActivity {
     @BindView(R.id.tvuser5) TextView tvuser5;
     @BindView(R.id.tvpont5) TextView tvpont5;
     @BindView(R.id.clearscore) Button clearscore;
-    private com.example.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
+    private com.quizapp.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private Cursor c;
     List<Integer> pontok_szama = new ArrayList<Integer>();
@@ -39,7 +38,7 @@ public class ScoreBoard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score_board);
         ButterKnife.bind(this);
-        mDBHelper = new com.example.kovacszoltan.quizV1.DatabaseHelper(this);
+        mDBHelper = new com.quizapp.kovacszoltan.quizV1.DatabaseHelper(this);
         databasetolist();
         listtotable();
         clearscore.setOnClickListener(new View.OnClickListener() {

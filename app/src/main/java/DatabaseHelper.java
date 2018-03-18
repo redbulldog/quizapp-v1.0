@@ -1,4 +1,4 @@
-package com.example.kovacszoltan.quizV1;
+package com.quizapp.kovacszoltan.quizV1;
 
 import android.content.ContentValues;
 import android.content.Context;

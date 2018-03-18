@@ -1,4 +1,4 @@
-package com.example.kovacszoltan.quizV1;
+package com.quizapp.kovacszoltan.quizV1;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -105,7 +104,6 @@ public class CategoriesActivity extends AppCompatActivity {
         if (sharedPreferences.contains("jatekok")){
             ctggames.setVisibility(View.GONE);
             txt_games.setVisibility(View.GONE);
-
         }
         if (sharedPreferences.contains("filmek")){
             ctgmovies.setVisibility(View.GONE);

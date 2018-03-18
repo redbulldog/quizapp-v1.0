@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/Main_act"
     android:background="@drawable/movies_bg"
-    tools:context="com.example.kovacszoltan.quizV1.MainActivity">
+    tools:context="com.quizapp.kovacszoltan.quizV1.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"

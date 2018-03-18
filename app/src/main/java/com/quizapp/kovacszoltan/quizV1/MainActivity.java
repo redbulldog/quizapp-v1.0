@@ -1,14 +1,11 @@
-package com.example.kovacszoltan.quizV1;
+package com.quizapp.kovacszoltan.quizV1;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.drawable.Drawable;
-import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,9 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -37,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.Main_act) RelativeLayout Main_act;
     @BindView(R.id.txt_kerdesekszama) TextView txt_kerdesekszama;
 
-    private com.example.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
+    private com.quizapp.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
     private SQLiteDatabase mDb;
     private Random r = new Random();
     List<Integer> regikerdes = new ArrayList<Integer>();
@@ -58,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        mDBHelper = new com.example.kovacszoltan.quizV1.DatabaseHelper(this);
+        mDBHelper = new com.quizapp.kovacszoltan.quizV1.DatabaseHelper(this);
         categorieshelper();
         init();
         ujkerdes();
@@ -283,11 +278,11 @@ public class MainActivity extends AppCompatActivity {
             life--;
         } else{
             alert_vesztett.show();
-        }
+        }*/
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
-        }*/
+        }
 
         ujkerdes();
         pontok--;
@@ -336,6 +331,8 @@ private void categorieshelper() {
         Main_act.setBackgroundResource(R.drawable.games_bg);
     } else if (this.kerdesselect_sql.equals("* FROM quiz WHERE kategoria='etelital'")) {
         Main_act.setBackgroundResource(R.drawable.food_bg);
+    } else if (this.kerdesselect_sql.equals("* FROM quiz WHERE kategoria='tortenelem'")) {
+        Main_act.setBackgroundResource(R.drawable.history_bg);
     }
 }
 
