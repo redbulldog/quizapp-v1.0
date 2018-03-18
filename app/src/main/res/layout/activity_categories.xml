@@ -67,6 +67,24 @@
                 android:textStyle="bold"
                 android:fontFamily="casual"
                 android:layout_marginTop="-52dp" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/history_category"
+                android:adjustViewBounds="true"
+                android:layout_below="@id/ctg_food"
+                android:id="@+id/ctg_history"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Történelem"
+                android:textAllCaps="true"
+                android:textSize="30dp"
+                android:textColor="#ffffff"
+                android:id="@+id/txt_history"
+                android:textStyle="bold"
+                android:fontFamily="casual"
+                android:layout_marginTop="-52dp" />
 
             <ImageView
                 android:layout_width="match_parent"

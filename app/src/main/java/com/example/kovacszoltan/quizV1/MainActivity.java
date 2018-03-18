@@ -99,7 +99,11 @@ public class MainActivity extends AppCompatActivity {
                         } else if(kerdesselect_sql.equals("* FROM quiz WHERE kategoria='etelital'"))
                         {
                             editor.putInt("etelital", 1);
+                        } else if(kerdesselect_sql.equals("* FROM quiz WHERE kategoria='tortenelem'"))
+                        {
+                            editor.putInt("tortenelem", 1);
                         }
+
                         editor.commit();
                         finish();
                     }

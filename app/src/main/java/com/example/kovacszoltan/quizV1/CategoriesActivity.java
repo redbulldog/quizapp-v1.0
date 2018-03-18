@@ -18,9 +18,11 @@ public class CategoriesActivity extends AppCompatActivity {
     @BindView(R.id.ctg_games) ImageView ctggames;
     @BindView(R.id.ctg_all) ImageView ctgall;
     @BindView(R.id.ctg_food) ImageView ctgfood;
+    @BindView(R.id.ctg_history) ImageView ctghistory;
     @BindView(R.id.txt_movies) TextView txt_movies;
     @BindView(R.id.txt_games) TextView txt_games;
     @BindView(R.id.txt_food) TextView txt_food;
+    @BindView(R.id.txt_history) TextView txt_history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
                 startActivity(startgame);
+                finish();
             }
         });
         ctgall.setOnClickListener(new View.OnClickListener() {
@@ -51,6 +54,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
                 startActivity(startgame);
+                finish();
             }
         });
         ctggames.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +66,7 @@ public class CategoriesActivity extends AppCompatActivity {
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
                 startActivity(startgame);
+                finish();
             }
         });
         ctgfood.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +79,20 @@ public class CategoriesActivity extends AppCompatActivity {
                 editor.commit();
                 Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
                 startActivity(startgame);
+                finish();
+            }
+        });
+        ctghistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WHERE kategoria='tortenelem'");
+                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='tortenelem'");
+                editor.commit();
+                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
+                startActivity(startgame);
+                finish();
             }
         });
     }
@@ -95,6 +114,10 @@ public class CategoriesActivity extends AppCompatActivity {
         if (sharedPreferences.contains("etelital")){
             ctgfood.setVisibility(View.GONE);
             txt_food.setVisibility(View.GONE);
+        }
+        if (sharedPreferences.contains("tortenelem")){
+            ctghistory.setVisibility(View.GONE);
+            txt_history.setVisibility(View.GONE);
         }
     }
 }
