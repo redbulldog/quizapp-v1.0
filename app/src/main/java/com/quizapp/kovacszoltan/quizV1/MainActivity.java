@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.MediaPlayer;
+import android.os.Handler;
 import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -142,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        ujkerdes();
                         helyesvalasz();
 
                     }
@@ -176,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        ujkerdes();
                         helyesvalasz();
 
                     }
@@ -210,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        ujkerdes();
                         helyesvalasz();
 
                     }
@@ -244,7 +243,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        ujkerdes();
                         helyesvalasz();
 
                     }
@@ -272,6 +270,16 @@ public class MainActivity extends AppCompatActivity {
     }
     public void helyesvalasz(){
         pontok++;
+        MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.right);
+        mediaPlayer.start();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ujkerdes();
+            }
+        }, 2000);
+
     }
     public void rosszvalasz(){
         /*if (life > 1){
