@@ -293,7 +293,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ujkerdes();
-        pontok--;
     }
     public void ujkerdes() {
 

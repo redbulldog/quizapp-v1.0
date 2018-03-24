@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.quizapp.kovacszoltan.quizV1.MainMenu"
     android:background="@drawable/android_main_menu_bg">
+    <Button
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/rounded_button2"
+        android:text="i"
+        android:textAllCaps="false"
+        android:textSize="25px"
+        android:id="@+id/btn_info"
+        android:textColor="#fff"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="30px"
+        android:layout_marginTop="30px"/>
 
     <LinearLayout
         android:layout_width="match_parent"
