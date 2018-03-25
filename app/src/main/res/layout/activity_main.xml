@@ -9,18 +9,33 @@
     tools:context="com.quizapp.kovacszoltan.quizV1.MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="x/x"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="10"
+        android:textAlignment="center"
+        android:background="@drawable/roundcorners"
         android:textColor="#fff"
+        android:padding="5dp"
+        android:layout_margin="10dp"
         android:id="@+id/txt_kerdesekszama"/>
+    <TextView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:text="3"
+        android:background="@drawable/jelenkerdes"
+        android:textColor="#fff"
+        android:textSize="10dp"
+        android:layout_margin="25dp"
+        android:textAlignment="center"
+        android:paddingTop="3dp"
+        android:id="@+id/txt_jelenkerdes"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/felsolinear"
-        android:paddingTop="20dp">
+        android:paddingTop="50dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

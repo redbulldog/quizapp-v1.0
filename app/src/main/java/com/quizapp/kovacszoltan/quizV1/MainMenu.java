@@ -23,6 +23,8 @@ import java.io.IOException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.media.MediaRecorder.VideoSource.CAMERA;
+
 public class MainMenu extends AppCompatActivity {
     @BindView(R.id.btn_newgame) Button btn_newgame;
     @BindView(R.id.btn_scoreboard) Button btn_scoreboard;
@@ -54,7 +56,6 @@ public class MainMenu extends AppCompatActivity {
             byte[] imageAsBytes = Base64.decode(imagestring.getBytes(), Base64.DEFAULT);
             profile_image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
         }
-
     }
 
     private void actions(){
@@ -98,7 +99,7 @@ public class MainMenu extends AppCompatActivity {
         profile_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showPictureDialog();
+                choosePhotoFromGallary();
 
             }
 

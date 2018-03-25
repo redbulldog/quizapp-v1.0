@@ -80,12 +80,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
         return mDataBase != null;
     }
-    public boolean adatRogzites(String username, Integer pontok_szama){
+    public boolean adatRogzites(String username, Integer pontok_szama, String profile_image){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("Username",username);
         contentValues.put("Pontok_szama",pontok_szama);
+        contentValues.put("Profile_image",profile_image);
 
         long result = db.insert("Scoreboard",null,contentValues);
 

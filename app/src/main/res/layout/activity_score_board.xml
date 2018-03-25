@@ -4,20 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.quizapp.kovacszoltan.quizV1.ScoreBoard">
+    tools:context="com.quizapp.kovacszoltan.quizV1.ScoreBoard"
+    android:background="@color/colorPrimaryDark">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Eredménytábla"
         android:id="@+id/scoretext"
         android:textAlignment="center"
-        android:textSize="40dp" />
+        android:textSize="40dp"
+        android:textColor="#fff"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/first_place"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/profile_placeholder"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="1"
+            android:layout_marginTop="-32dp"
+            android:textAlignment="center"
+            android:background="@drawable/rounded_button2"
+            android:textSize="30dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="pont"
+            android:textColor="#fff"
+            android:id="@+id/first_place_score"/>
+    </LinearLayout>
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scoretable"
-        android:layout_below="@id/scoretext"
-        android:stretchColumns="1">>
+        android:layout_above="@+id/bottombutton"
+        android:stretchColumns="1"
+        android:gravity="bottom">
         <TableRow>
             <TextView
                 android:paddingLeft="60dip"
@@ -25,7 +56,8 @@
                 android:text="Teszt"
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
             <TextView
                 android:paddingRight="60dip"
                 android:id="@+id/tvpont1"
@@ -33,7 +65,8 @@
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
                 android:gravity="right"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -42,7 +75,8 @@
                 android:text="Teszt"
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
             <TextView
                 android:paddingRight="60dip"
                 android:id="@+id/tvpont2"
@@ -50,7 +84,8 @@
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
                 android:gravity="right"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -59,7 +94,8 @@
                 android:text="Teszt"
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
             <TextView
                 android:paddingRight="60dip"
                 android:id="@+id/tvpont3"
@@ -67,7 +103,8 @@
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
                 android:gravity="right"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -76,7 +113,8 @@
                 android:text="Teszt"
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
             <TextView
                 android:paddingRight="60dip"
                 android:id="@+id/tvpont4"
@@ -84,7 +122,8 @@
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
                 android:gravity="right"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
         </TableRow>
         <TableRow>
             <TextView
@@ -93,7 +132,8 @@
                 android:text="Teszt"
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
             <TextView
                 android:paddingRight="60dip"
                 android:id="@+id/tvpont5"
@@ -101,15 +141,25 @@
                 android:paddingBottom="10dip"
                 android:paddingTop="10dip"
                 android:gravity="right"
-                android:textSize="30dp"/>
+                android:textSize="30dp"
+                android:textColor="#fff"/>
         </TableRow>
 
     </TableLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:id="@+id/bottombutton">
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Eredmények törlése"
-        android:id="@+id/clearscore"/>
+        android:background="@drawable/rounded_button1"
+        android:padding="15dp"
+        android:id="@+id/clearscore" />
+    </LinearLayout>
 
 </RelativeLayout>

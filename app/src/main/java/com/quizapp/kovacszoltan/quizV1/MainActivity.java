@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.btn_valasz2) Button btn_valasz2;
     @BindView(R.id.btn_valasz3) Button btn_valasz3;
     @BindView(R.id.btn_valasz4) Button btn_valasz4;
+    @BindView(R.id.txt_jelenkerdes) TextView txt_jelenkerdes;
     @BindView(R.id.Main_act) RelativeLayout Main_act;
     @BindView(R.id.txt_kerdesekszama) TextView txt_kerdesekszama;
 
@@ -44,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
     List<String> valasz3 = new ArrayList<String>();
     List<String> valasz4 = new ArrayList<String>();
     Cursor c;
-    String kerdesekszama_sql, kerdesselect_sql;
+    String kerdesselect_sql;
     int idIndex, kerdesIndex, valasz1index, valasz2index, valasz3index, valasz4index, jelenkerdesek, pontok=0;
-    int gombsorrend, life = 5, elozogombsorrend = 0, kerdesekszama = 0, kerdesek = 0;
-    private String username;
+    int gombsorrend, kerdesekszama = 0, kerdesek = 0;
+    private String username, profile_image;
     private AlertDialog.Builder alert_vege, alert_kilep;
 
     @Override
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mDBHelper = new com.quizapp.kovacszoltan.quizV1.DatabaseHelper(this);
         categorieshelper();
         init();
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 .setPositiveButton("Nem", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        mDBHelper.adatRogzites(username,pontok);
+                        mDBHelper.adatRogzites(username,pontok,profile_image);
                         SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.clear().commit();
@@ -118,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 .setNegativeButton("Igen", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        mDBHelper.adatRogzites(username,pontok,profile_image);
                         Intent gomain = new Intent(MainActivity.this, MainMenu.class);
                         startActivity(gomain);
                         finish();
@@ -125,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
                 });
         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
         this.username = sharedPreferences.getString("username", "");
+        this.profile_image = sharedPreferences.getString("image", "");
         SharedPreferences sharedPreferences2 = getSharedPreferences("Scores", Context.MODE_PRIVATE);
         this.pontok = sharedPreferences2.getInt("pontok", 0);
         Toast.makeText(MainActivity.this,Integer.toString(this.pontok),Toast.LENGTH_SHORT).show();
@@ -270,6 +275,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void helyesvalasz(){
         pontok++;
+        diablebuttons();
         MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.right);
         mediaPlayer.start();
         final Handler handler = new Handler();
@@ -277,22 +283,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 ujkerdes();
+                gombok();
             }
-        }, 2000);
+        }, 500);
 
     }
     public void rosszvalasz(){
-        /*if (life > 1){
-            life--;
-        } else{
-            alert_vesztett.show();
-        }*/
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        diablebuttons();
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
         }
-
-        ujkerdes();
+        MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.wrong);
+        mediaPlayer.start();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ujkerdes();
+                gombok();
+            }
+        }, 300);
     }
     public void ujkerdes() {
 
@@ -312,10 +323,11 @@ public class MainActivity extends AppCompatActivity {
 
             //Toast.makeText(MainActivity.this, Integer.toString(this.kerdesek), Toast.LENGTH_SHORT).show();
             regikerdes.add(this.kerdesek);
-            txt_kerdesekszama.setText(Integer.toString(kerdesekszama+1) +" / " + Integer.toString(c.getCount()));
+            txt_kerdesekszama.setText(Integer.toString(c.getCount()));
+            txt_jelenkerdes.setText(Integer.toString(kerdesekszama+1));
 
             kerdesekszama++;
-            gombok();
+            //gombok();
         } else if (kerdesekszama == c.getCount())
         {
             tv_kerdes.setText("A kérdések elfogytak!");
@@ -361,6 +373,32 @@ private void databasetolist(){
 
         c.moveToNext();
     }
+}
+public void diablebuttons(){
+    btn_valasz1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    });
+    btn_valasz2.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    });
+    btn_valasz3.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    });
+    btn_valasz4.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    });
 }
 
 }
