@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void helyesvalasz(){
         pontok++;
-        diablebuttons();
+        disablebuttons();
         MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.right);
         mediaPlayer.start();
         final Handler handler = new Handler();
@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void rosszvalasz(){
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        diablebuttons();
+        disablebuttons();
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
         }
@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-private void categorieshelper() {
+    private void categorieshelper() {
     SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
     this.kerdesselect_sql = sharedPreferences.getString("kerdesselect", "");
     if (this.kerdesselect_sql.equals("* FROM quiz WHERE kategoria='jatekok'")) {
@@ -355,7 +355,7 @@ private void categorieshelper() {
     }
 }
 
-private void databasetolist(){
+    private void databasetolist(){
     c.moveToFirst();
     for(int i=0; i < this.jelenkerdesek; i++)
     {
@@ -374,7 +374,7 @@ private void databasetolist(){
         c.moveToNext();
     }
 }
-public void diablebuttons(){
+    public void disablebuttons(){
     btn_valasz1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
