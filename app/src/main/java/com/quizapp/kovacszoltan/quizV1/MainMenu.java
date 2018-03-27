@@ -142,7 +142,7 @@ public class MainMenu extends AppCompatActivity {
                     //String path = saveImage(bitmap);
                     profile_image.setImageBitmap(bitmap);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos); //bm is the bitmap object
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos); //bm is the bitmap object
                     byte[] b = baos.toByteArray();
                     String encoded = Base64.encodeToString(b, Base64.DEFAULT);
 

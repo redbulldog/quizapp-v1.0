@@ -296,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
         }
         MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.wrong);
         mediaPlayer.start();
+        Toast.makeText(MainActivity.this, "A helyes válasz: "+valasz4.get(this.kerdesek), Toast.LENGTH_SHORT).show();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -304,6 +305,7 @@ public class MainActivity extends AppCompatActivity {
                 gombok();
             }
         }, 300);
+
     }
     public void ujkerdes() {
 
