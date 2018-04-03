@@ -339,11 +339,6 @@ public class MainActivity extends AppCompatActivity {
         }
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
 
-
-
-
-
-
     }
     private void categorieshelper() {
     SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
