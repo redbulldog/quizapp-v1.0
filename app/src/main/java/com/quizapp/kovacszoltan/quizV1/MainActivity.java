@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mDBHelper = new com.quizapp.kovacszoltan.quizV1.DatabaseHelper(this);
         categorieshelper();
+        databasetolist();
         init();
         ujkerdes();
         gombok();
@@ -310,11 +311,9 @@ public class MainActivity extends AppCompatActivity {
     public void ujkerdes() {
 
         this.gombsorrend = r.nextInt(4) + 1;
-        mDb = mDBHelper.getWritableDatabase();
-        this.c = mDb.rawQuery("SELECT " + this.kerdesselect_sql, null);
-        jelenkerdesek = c.getCount();
+
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
-        databasetolist();
+
         if (kerdesekszama < c.getCount()) {
             this.kerdesek = r.nextInt(c.getCount());
             do {
@@ -353,6 +352,9 @@ public class MainActivity extends AppCompatActivity {
 }
 
     private void databasetolist(){
+        mDb = mDBHelper.getWritableDatabase();
+        this.c = mDb.rawQuery("SELECT " + this.kerdesselect_sql, null);
+        jelenkerdesek = c.getCount();
     c.moveToFirst();
     for(int i=0; i < this.jelenkerdesek; i++)
     {

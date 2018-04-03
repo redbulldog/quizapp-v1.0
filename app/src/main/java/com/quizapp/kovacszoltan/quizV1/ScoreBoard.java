@@ -90,7 +90,6 @@ public class ScoreBoard extends AppCompatActivity {
             first_place.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
             first_place_score.setText(pontok_szama.get(0) + " pont");
         }
-
     }
     private void listtotable(){
         while (pontok_szama.size()<6)
