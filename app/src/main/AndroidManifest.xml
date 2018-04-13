@@ -33,7 +33,6 @@
         <activity
             android:name=".CategoriesActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Information"></activity>
     </application>
 
 </manifest>

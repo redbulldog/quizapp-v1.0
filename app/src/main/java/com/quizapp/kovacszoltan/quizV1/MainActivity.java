@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     public void init(){
         alert_vege = new AlertDialog.Builder(MainActivity.this);
         alert_kilep = new AlertDialog.Builder(MainActivity.this);
-        alert_vege.setTitle("Az össes kérdés megválaszolva!")
+        alert_vege.setTitle("Az összes kérdés megválaszolva!")
                 .setMessage("Szeretnéd folytatni egy másik kategóriával?")
                 .setPositiveButton("Nem", new DialogInterface.OnClickListener() {
                     @Override

@@ -1,8 +1,10 @@
 package com.quizapp.kovacszoltan.quizV1;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +23,7 @@ public class CategoriesActivity extends AppCompatActivity {
     @BindView(R.id.txt_games) TextView txt_games;
     @BindView(R.id.txt_food) TextView txt_food;
     @BindView(R.id.txt_history) TextView txt_history;
+    private AlertDialog.Builder alert_vege;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,7 @@ public class CategoriesActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         action();
         hideused();
+        endgame();
     }
     private void action(){
         ctgmovies.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +91,28 @@ public class CategoriesActivity extends AppCompatActivity {
         if (sharedPreferences.contains("tortenelem")){
             ctghistory.setVisibility(View.GONE);
             txt_history.setVisibility(View.GONE);
+        }
+    }
+    public void endgame(){
+        alert_vege = new AlertDialog.Builder(CategoriesActivity.this);
+        alert_vege.setTitle("Az összes kérdés megválaszolva!")
+                .setMessage("Gratulálunk, az összes kérdést megválaszoltad a játékban")
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.clear().commit();
+                        Intent gomain = new Intent(CategoriesActivity.this, MainMenu.class);
+                        startActivity(gomain);
+                        finish();
+                    }
+                })
+                .setCancelable(false)
+                .create();
+        SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
+        if (sharedPreferences.contains("tortenelem") && sharedPreferences.contains("etelital") && sharedPreferences.contains("filmek") &&sharedPreferences.contains("jatekok")){
+            alert_vege.show();
         }
     }
 }
