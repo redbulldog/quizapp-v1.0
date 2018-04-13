@@ -86,24 +86,6 @@
                 android:fontFamily="casual"
                 android:layout_marginTop="-52dp" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:adjustViewBounds="true"
-                android:src="@drawable/category1"
-                android:layout_below="@id/ctg_games"
-                android:id="@+id/ctg_all"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Összes kategória"
-                android:textAllCaps="true"
-                android:textSize="30dp"
-                android:textColor="#ffffff"
-                android:textStyle="bold"
-                android:fontFamily="casual"
-                android:layout_marginTop="-52dp" />
         </LinearLayout>
     </ScrollView>
 

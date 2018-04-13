@@ -2,6 +2,7 @@ package com.quizapp.kovacszoltan.quizV1;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -87,7 +88,12 @@ public class ScoreBoard extends AppCompatActivity {
         if (image.size()>0)
         {
             byte[] imageAsBytes = Base64.decode(image.get(0).getBytes(), Base64.DEFAULT);
-            first_place.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+            if (imageAsBytes.length == 0){
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.profile_placeholder);
+                first_place.setImageBitmap(bitmap);
+            }else{
+                first_place.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
+            }
             first_place_score.setText(pontok_szama.get(0) + " pont");
         }
     }

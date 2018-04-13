@@ -15,7 +15,6 @@ import butterknife.ButterKnife;
 public class CategoriesActivity extends AppCompatActivity {
     @BindView(R.id.ctg_movies) ImageView ctgmovies;
     @BindView(R.id.ctg_games) ImageView ctggames;
-    @BindView(R.id.ctg_all) ImageView ctgall;
     @BindView(R.id.ctg_food) ImageView ctgfood;
     @BindView(R.id.ctg_history) ImageView ctghistory;
     @BindView(R.id.txt_movies) TextView txt_movies;
@@ -35,69 +34,41 @@ public class CategoriesActivity extends AppCompatActivity {
         ctgmovies.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='filmek'");
-                editor.commit();
-                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
-                startActivity(startgame);
-                finish();
-            }
-        });
-        ctgall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesselect", "* FROM quiz");
-                editor.commit();
-                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
-                startActivity(startgame);
-                finish();
+                onclickaction( "filmek");
+
             }
         });
         ctggames.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='jatekok'");
-                editor.commit();
-                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
-                startActivity(startgame);
-                finish();
+                onclickaction("jatekok");
             }
         });
         ctgfood.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WHERE kategoria='etelital'");
-                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='etelital'");
-                editor.commit();
-                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
-                startActivity(startgame);
-                finish();
+                onclickaction("etelital");
             }
         });
         ctghistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("kerdesekszama", "SELECT count(kerdes) FROM quiz WHERE kategoria='tortenelem'");
-                editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='tortenelem'");
-                editor.commit();
-                Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
-                startActivity(startgame);
-                finish();
+                onclickaction("tortenelem");
             }
         });
     }
     public void onBackPressed(){
         Intent mainmenu = new Intent(CategoriesActivity.this,MainMenu.class);
         startActivity(mainmenu);
+    }
+    private void onclickaction(String sqlcommand){
+        SharedPreferences sharedPreferences = getSharedPreferences("Categories", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("kerdesselect", "* FROM quiz WHERE kategoria='"+sqlcommand+"'");
+        editor.commit();
+        Intent startgame = new Intent(CategoriesActivity.this, MainActivity.class);
+        startActivity(startgame);
+        finish();
     }
     public void hideused(){
         SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
