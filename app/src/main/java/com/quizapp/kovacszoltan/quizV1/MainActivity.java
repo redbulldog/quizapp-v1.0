@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", username);
                         editor.putInt("pontok",pontok);
+                        Toast.makeText(MainActivity.this, String.valueOf(pontok),Toast.LENGTH_SHORT).show();
                         if(kerdesselect_sql.equals("* FROM quiz WHERE kategoria='jatekok'"))
                         {
                             editor.putInt("jatekok", 1);
@@ -133,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         this.profile_image = sharedPreferences.getString("image", "");
         SharedPreferences sharedPreferences2 = getSharedPreferences("Scores", Context.MODE_PRIVATE);
         this.pontok = sharedPreferences2.getInt("pontok", 0);
-        Toast.makeText(MainActivity.this,Integer.toString(this.pontok),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this,Integer.toString(this.pontok),Toast.LENGTH_SHORT).show();
     }
     public void onBackPressed(){
         alert_kilep.show();
@@ -334,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
             tv_kerdes.setText("A kérdések elfogytak!");
             alert_vege.show();
             //mDBHelper.adatRogzites(this.username,this.pontok);
-            Toast.makeText(MainActivity.this,Integer.toString(pontok),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(MainActivity.this,Integer.toString(pontok),Toast.LENGTH_SHORT).show();
         }
         //Toast.makeText(MainActivity.this, Integer.toString(c.getCount()), Toast.LENGTH_SHORT).show();
 

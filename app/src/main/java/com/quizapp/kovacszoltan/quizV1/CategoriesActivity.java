@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,12 +25,15 @@ public class CategoriesActivity extends AppCompatActivity {
     @BindView(R.id.txt_food) TextView txt_food;
     @BindView(R.id.txt_history) TextView txt_history;
     private AlertDialog.Builder alert_vege;
+    private int pontok;
+    private com.quizapp.kovacszoltan.quizV1.DatabaseHelper mDBHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_categories);
         ButterKnife.bind(this);
+        mDBHelper = new com.quizapp.kovacszoltan.quizV1.DatabaseHelper(this);
         action();
         hideused();
         endgame();
@@ -100,9 +104,16 @@ public class CategoriesActivity extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.clear().commit();
+                        //SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
+                        //SharedPreferences.Editor editor = sharedPreferences.edit();
+                        //editor.clear().commit();
+                        SharedPreferences sharedPreferencesuser = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+                        String username = sharedPreferencesuser.getString("username", "");
+                        String profile_image = sharedPreferencesuser.getString("image", "");
+                        SharedPreferences sharedPreferences2 = getSharedPreferences("Scores", Context.MODE_PRIVATE);
+                        pontok = sharedPreferences2.getInt("pontok", 0);
+                        Toast.makeText(CategoriesActivity.this, String.valueOf(pontok), Toast.LENGTH_SHORT).show();
+                        mDBHelper.adatRogzites(username,pontok,profile_image);
                         Intent gomain = new Intent(CategoriesActivity.this, MainMenu.class);
                         startActivity(gomain);
                         finish();

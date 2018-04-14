@@ -29,7 +29,6 @@ public class MainMenu extends AppCompatActivity {
     @BindView(R.id.btn_newgame) Button btn_newgame;
     @BindView(R.id.btn_scoreboard) Button btn_scoreboard;
     @BindView(R.id.btn_exit) Button btn_exit;
-    @BindView(R.id.btn_info) Button btn_info;
     @BindView(R.id.btn_felh_nev) Button btn_felh_nev;
     @BindView(R.id.profile_image) de.hdodenhof.circleimageview.CircleImageView profile_image;
     private AlertDialog.Builder felh_nev_input;
@@ -62,13 +61,7 @@ public class MainMenu extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("Scores", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear().commit();
-        btn_info.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent info = new Intent(MainMenu.this, Information.class);
-                startActivity(info);
-            }
-        });
+
         btn_newgame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,10 +132,14 @@ public class MainMenu extends AppCompatActivity {
                 Uri contentURI = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    int  newidth=bitmap.getWidth(), newheight=bitmap.getHeight();
+                    newheight = 300 * newheight / newidth;
+                    newidth = 300;
+                    Bitmap b2 = Bitmap.createScaledBitmap(bitmap, newidth, newheight, false);
                     //String path = saveImage(bitmap);
-                    profile_image.setImageBitmap(bitmap);
+                    profile_image.setImageBitmap(b2);
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 10, baos); //bm is the bitmap object
+                    b2.compress(Bitmap.CompressFormat.JPEG, 50, baos); //bm is the bitmap object
                     byte[] b = baos.toByteArray();
                     String encoded = Base64.encodeToString(b, Base64.DEFAULT);
 
