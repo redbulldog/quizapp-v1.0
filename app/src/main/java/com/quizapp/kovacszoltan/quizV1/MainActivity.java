@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     int gombsorrend, kerdesekszama = 0, kerdesek = 0;
     private String username, profile_image;
     private AlertDialog.Builder alert_vege, alert_kilep;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -278,8 +279,7 @@ public class MainActivity extends AppCompatActivity {
     public void helyesvalasz(){
         pontok++;
         disablebuttons();
-        MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.right);
-        mediaPlayer.start();
+        playSound(R.raw.right,MainActivity.this);
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -296,8 +296,8 @@ public class MainActivity extends AppCompatActivity {
         if (vibrator.hasVibrator()) {
             vibrator.vibrate(300); // for 500 ms
         }
-        MediaPlayer mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.wrong);
-        mediaPlayer.start();
+
+        playSound(R.raw.wrong,MainActivity.this);
         Toast.makeText(MainActivity.this, "A helyes válasz: "+valasz4.get(this.kerdesek), Toast.LENGTH_SHORT).show();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -400,6 +400,21 @@ public class MainActivity extends AppCompatActivity {
         }
     });
 }
+    private void playSound(int pfile, Context pcontext){
+
+        final int file = pfile;
+        final Context context = pcontext;
+        MediaPlayer mp = MediaPlayer.create(context, file);
+        mp.start();
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+            public void onCompletion(MediaPlayer mp) {
+                // TODO Auto-generated method stub
+                mp.release();
+            }
+
+        });
+    }
 
 }
 
