@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mDBHelper = new com.quizapp.kovacszoltan.quizV1.DatabaseHelper(this);
+        try {
+            mDBHelper.updateDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         categorieshelper();
         databasetolist();
         init();
@@ -409,7 +415,6 @@ public class MainActivity extends AppCompatActivity {
         mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
             public void onCompletion(MediaPlayer mp) {
-                // TODO Auto-generated method stub
                 mp.release();
             }
 

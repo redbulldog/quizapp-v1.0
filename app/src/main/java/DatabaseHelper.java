@@ -21,6 +21,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final Context mContext;
     private boolean mNeedUpdate = false;
 
+    //quiz table
+    public static final String TABLE_QUIZ       = "quiz";
+    public static final String COLUMN_KERDES    = "kerdes";
+    public static final String COLUMN_VALASZ1      = "valasz1";
+    public static final String COLUMN_VALASZ2     = "valasz2";
+    public static final String COLUMN_VALASZ3   = "valasz3";
+    public static final String COLUMN_VALASZ4   = "valasz4";
+    public static final String COLUMN_KATEGORIA   = "kategoria";
+    public static final String COLUMN_NEHEZSEG   = "nehezseg";
+
+
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         if (android.os.Build.VERSION.SDK_INT >= 17)
@@ -114,4 +125,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (newVersion > oldVersion)
             mNeedUpdate = true;
     }
+
+
 }
